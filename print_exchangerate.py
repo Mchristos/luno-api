@@ -1,23 +1,15 @@
-import requests 
+frequencyInSeconds = 10
+import luno_api
+import threading
 import json
 import time 
 import datetime
-import threading
-
-frequencyInSeconds = 10
-
-class BitXApi():
-    def __init__(self):
-        self.base_url = "https://api.mybitx.com/api/1/"
-    def get_ticker(self):
-        url = self.base_url + "ticker?pair=XBTZAR"
-        response = requests.get(url)
-        return response
 
 
 def print_exchangerate():
+    """ Prints the luno exchange rate to the console every x seconds """
     threading.Timer(frequencyInSeconds, print_exchangerate).start()
-    api = BitXApi()
+    api = luno_api.LunoApi()
     response = api.get_ticker()    
     if response.status_code == 200:
         response_dict = json.loads(response.text)
@@ -28,7 +20,3 @@ def print_exchangerate():
         print("%s Bid: R%s  Ask: R%s Avg: R%s" % (timestamp, bid, ask, avg))
 
 print_exchangerate()
-
-
-
-
