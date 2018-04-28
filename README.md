@@ -12,3 +12,6 @@ A python SDK for the Luno bitcoin exchange API
 
 ### Latest exchange rate 
     api.get_ticker()
+## Includes 
+
+Example script which prints the live exchange rate to the console every 10 seconds. 
