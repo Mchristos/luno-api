@@ -1,15 +1,16 @@
-frequencyInSeconds = 10
-import luno_api
+""" Print the live bitcoin price (bid/ask) in ZAR on the Luno bitcoin exchange every 10 seconds """
+
+from luno_api import LunoApi
 import threading
 import json
 import time 
 import datetime
 
-
+frequencyInSeconds = 10
 def print_exchangerate():
     """ Prints the luno exchange rate to the console every x seconds """
     threading.Timer(frequencyInSeconds, print_exchangerate).start()
-    api = luno_api.LunoApi()
+    api = LunoApi()
     response = api.get_ticker()    
     if response.status_code == 200:
         response_dict = json.loads(response.text)
